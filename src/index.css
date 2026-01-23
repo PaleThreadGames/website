@@ -537,7 +537,221 @@ button, a {
   .hero-ring,
   .hero-stream,
   .hero-orb,
-  .hero-pulse {
+  .hero-pulse,
+  .games-rain-drop,
+  .games-structure,
+  .games-fog {
+    animation: none !important;
+  }
+}
+
+/* Games Section Moody Rainy Animation */
+.games-rain-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.95) 0%,
+    rgba(30, 41, 59, 0.98) 50%,
+    rgba(15, 23, 42, 0.95) 100%
+  );
+}
+
+/* Background Structures */
+.games-structures {
+  position: absolute;
+  inset: 0;
+  bottom: 0;
+}
+
+.games-structure {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(20, 184, 166, 0.15) 0%,
+    rgba(139, 92, 246, 0.1) 50%,
+    transparent 100%
+  );
+  border-left: 1px solid rgba(20, 184, 166, 0.2);
+  border-right: 1px solid rgba(20, 184, 166, 0.2);
+  box-shadow: 
+    inset 0 0 30px rgba(20, 184, 166, 0.1),
+    0 0 20px rgba(139, 92, 246, 0.1);
+}
+
+.games-structure-1 {
+  left: 5%;
+  width: 80px;
+  height: 40%;
+  clip-path: polygon(0 100%, 20% 0, 80% 0, 100% 100%);
+}
+
+.games-structure-2 {
+  left: 20%;
+  width: 120px;
+  height: 60%;
+  clip-path: polygon(0 100%, 15% 0, 85% 0, 100% 100%);
+}
+
+.games-structure-3 {
+  left: 45%;
+  width: 100px;
+  height: 50%;
+  clip-path: polygon(0 100%, 25% 0, 75% 0, 100% 100%);
+}
+
+.games-structure-4 {
+  left: 65%;
+  width: 90px;
+  height: 45%;
+  clip-path: polygon(0 100%, 20% 0, 80% 0, 100% 100%);
+}
+
+.games-structure-5 {
+  left: 85%;
+  width: 70px;
+  height: 35%;
+  clip-path: polygon(0 100%, 30% 0, 70% 0, 100% 100%);
+}
+
+/* Rain Container */
+.games-rain-container {
+  position: absolute;
+  inset: 0;
+}
+
+/* Rain Drops */
+.games-rain-drop {
+  position: absolute;
+  width: calc(1px * var(--size-multiplier, 1));
+  height: calc(15px * var(--size-multiplier, 1));
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 184, 166, 0.8) 0%,
+    rgba(139, 92, 246, 0.6) 50%,
+    transparent 100%
+  );
+  left: var(--x-pos, 50%);
+  top: -50px;
+  animation: rain-fall var(--duration, 0.8s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  opacity: var(--opacity, 0.5);
+  filter: blur(calc(0.3px * var(--size-multiplier, 1)));
+}
+
+/* Color variations for depth - smaller drops are lighter/farther */
+.games-rain-drop:nth-child(3n) {
+  background: linear-gradient(
+    to bottom,
+    rgba(59, 130, 246, 0.7) 0%,
+    rgba(20, 184, 166, 0.5) 50%,
+    transparent 100%
+  );
+}
+
+.games-rain-drop:nth-child(7n) {
+  background: linear-gradient(
+    to bottom,
+    rgba(139, 92, 246, 0.8) 0%,
+    rgba(59, 130, 246, 0.6) 50%,
+    transparent 100%
+  );
+}
+
+.games-rain-drop:nth-child(11n) {
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 184, 166, 0.6) 0%,
+    rgba(139, 92, 246, 0.4) 50%,
+    transparent 100%
+  );
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: var(--opacity, 0.5);
+  }
+  100% {
+    transform: translateY(calc(100vh + 50px)) translateX(var(--x-drift, 10px));
+    opacity: 0;
+  }
+}
+
+/* Rain hitting structures - create splashes */
+.games-structure::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(20, 184, 166, 0.1) 2px,
+    rgba(20, 184, 166, 0.1) 4px
+  );
+  animation: structure-rain 2s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes structure-rain {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 20px;
+  }
+}
+
+/* Atmospheric Fog/Mist */
+.games-fog {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(20, 184, 166, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 50%);
+  animation: fog-drift 15s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes fog-drift {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateX(-20px) translateY(10px);
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .header-wave,
+  .header-particle,
+  .header-mesh,
+  .hero-ring,
+  .hero-stream,
+  .hero-orb,
+  .hero-pulse,
+  .games-rain-drop,
+  .games-structure,
+  .games-fog {
     animation: none !important;
   }
 }

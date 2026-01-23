@@ -22,9 +22,52 @@ const Games = () => {
   return (
     <section
       id="games"
-      className="py-20 md:py-32 bg-slate-900 relative"
+      className="py-20 md:py-32 bg-slate-900 relative overflow-hidden"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Moody Rainy Animation Background */}
+      <div className="absolute inset-0 games-rain-bg pointer-events-none overflow-hidden">
+        {/* Background structures/buildings */}
+        <div className="absolute inset-0 games-structures">
+          {Array.from({ length: 5 }, (_, i) => (
+            <div
+              key={i}
+              className={`games-structure games-structure-${i + 1}`}
+            />
+          ))}
+        </div>
+        
+        {/* Rain drops */}
+        <div className="absolute inset-0 games-rain-container">
+          {Array.from({ length: 150 }, (_, i) => {
+            // More random distribution
+            const randomX = Math.random() * 100;
+            const randomDelay = Math.random() * 2;
+            const randomDuration = 0.6 + Math.random() * 0.8;
+            const randomOpacity = 0.2 + Math.random() * 0.5;
+            const randomSize = Math.random();
+            
+            return (
+              <div
+                key={i}
+                className="games-rain-drop"
+                style={{
+                  '--delay': `${randomDelay}s`,
+                  '--duration': `${randomDuration}s`,
+                  '--x-pos': `${randomX}%`,
+                  '--opacity': `${randomOpacity}`,
+                  '--size-multiplier': `${0.5 + randomSize * 1.5}`,
+                  '--x-drift': `${(Math.random() - 0.5) * 30}px`,
+                } as React.CSSProperties}
+              />
+            );
+          })}
+        </div>
+        
+        {/* Atmospheric fog/mist */}
+        <div className="absolute inset-0 games-fog"></div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-cool-purple-400 to-cool-teal-400 bg-clip-text text-transparent">
           Our Games
         </h2>
