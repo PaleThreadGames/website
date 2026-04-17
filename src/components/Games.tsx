@@ -12,7 +12,7 @@ const Games = () => {
     },
     {
       id: '2',
-      title: 'Untitled Metroidvania',
+      title: 'Isotope',
       genre: ['Metroidvania', 'Platformer'],
       status: 'in-development',
       description: 'Explore a vast interconnected world filled with secrets, upgrades, and challenging boss battles.',
@@ -22,56 +22,18 @@ const Games = () => {
   return (
     <section
       id="games"
-      className="py-20 md:py-32 bg-slate-900 relative overflow-hidden"
+      className="games-clean-section py-20 md:py-32 bg-slate-900 relative overflow-hidden"
     >
-      {/* Moody Rainy Animation Background */}
-      <div className="absolute inset-0 games-rain-bg pointer-events-none overflow-hidden">
-        {/* Background structures/buildings */}
-        <div className="absolute inset-0 games-structures">
-          {Array.from({ length: 5 }, (_, i) => (
-            <div
-              key={i}
-              className={`games-structure games-structure-${i + 1}`}
-            />
-          ))}
-        </div>
-        
-        {/* Rain drops */}
-        <div className="absolute inset-0 games-rain-container">
-          {Array.from({ length: 150 }, (_, i) => {
-            // More random distribution
-            const randomX = Math.random() * 100;
-            const randomDelay = Math.random() * 2;
-            const randomDuration = 0.6 + Math.random() * 0.8;
-            const randomOpacity = 0.2 + Math.random() * 0.5;
-            const randomSize = Math.random();
-            
-            return (
-              <div
-                key={i}
-                className="games-rain-drop"
-                style={{
-                  '--delay': `${randomDelay}s`,
-                  '--duration': `${randomDuration}s`,
-                  '--x-pos': `${randomX}%`,
-                  '--opacity': `${randomOpacity}`,
-                  '--size-multiplier': `${0.5 + randomSize * 1.5}`,
-                  '--x-drift': `${(Math.random() - 0.5) * 30}px`,
-                } as React.CSSProperties}
-              />
-            );
-          })}
-        </div>
-        
-        {/* Atmospheric fog/mist */}
-        <div className="absolute inset-0 games-fog"></div>
+      <div className="games-clean-bg pointer-events-none">
+        <div className="games-clean-grid"></div>
+        <div className="games-clean-glow"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-cool-purple-400 to-cool-teal-400 bg-clip-text text-transparent">
           Our Games
         </h2>
-        <p className="text-xl text-slate-400 text-center mb-12 max-w-2xl mx-auto">
+        <p className="text-lg text-slate-400 text-center mb-12 max-w-2xl mx-auto">
           We're hard at work crafting unforgettable gaming experiences. Check back soon for updates!
         </p>
 
@@ -98,7 +60,7 @@ const Games = () => {
             {upcomingGames.map((game) => (
               <div
                 key={game.id}
-                className="group relative p-8 rounded-lg bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-cool-blue-500/20 hover:border-cool-teal-400/40 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl"
+              className="group relative px-8 pt-14 pb-8 rounded-lg bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-cool-blue-500/20 hover:border-cool-teal-400/40 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl"
               >
                 {/* Status Badge */}
                 <div className="absolute top-4 right-4">
@@ -147,7 +109,11 @@ const Games = () => {
                     >
                       <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <p className="text-sm text-slate-500">Game Art Coming Soon</p>
+                    <p className="text-sm text-slate-500">
+                      {game.title === 'Isotope'
+                        ? 'Isotope art and screenshots coming soon'
+                        : `${game.title} art and screenshots coming soon`}
+                    </p>
                   </div>
                 </div>
               </div>

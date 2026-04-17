@@ -2,15 +2,19 @@ const About = () => {
   return (
     <section
       id="about"
-      className="py-20 md:py-32 bg-slate-800/50 relative"
+      className="about-clean-section py-20 md:py-32 bg-slate-800/50 relative"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="about-clean-bg" aria-hidden="true">
+        <div className="about-clean-shimmer"></div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-cool-blue-400 to-cool-teal-400 bg-clip-text text-transparent">
             About Us
           </h2>
 
-          <div className="space-y-6 text-lg md:text-xl text-slate-300 leading-relaxed">
+          <div className="space-y-6 text-base md:text-lg text-slate-300 leading-relaxed">
             <p>
               Welcome to <span className="text-cool-teal-400 font-semibold">Pale Thread Games</span>,
               an indie game development studio passionate about creating engaging and challenging

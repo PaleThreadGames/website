@@ -2,41 +2,12 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 md:pt-20"
+      className="hero-clean-section min-h-screen flex items-center justify-center relative overflow-hidden pt-16 md:pt-20"
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0 hero-animated-bg pointer-events-none">
-        {/* Rotating gradient rings */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="hero-ring hero-ring-1"></div>
-          <div className="hero-ring hero-ring-2"></div>
-          <div className="hero-ring hero-ring-3"></div>
-        </div>
-        
-        {/* Flowing energy streams */}
-        <div className="absolute inset-0 opacity-25">
-          <div className="hero-stream hero-stream-1"></div>
-          <div className="hero-stream hero-stream-2"></div>
-          <div className="hero-stream hero-stream-3"></div>
-        </div>
-        
-        {/* Orbital particles/orbs */}
-        <div className="absolute inset-0 opacity-50">
-          {Array.from({ length: 12 }, (_, i) => (
-            <div
-              key={i}
-              className={`hero-orb hero-orb-${i + 1}`}
-              style={{
-                '--delay': `${i * 0.4}s`,
-                '--duration': `${20 + (i % 4) * 3}s`,
-                '--radius': `${100 + (i % 3) * 80}px`,
-              } as React.CSSProperties}
-            />
-          ))}
-        </div>
-        
-        {/* Pulsing background gradient */}
-        <div className="absolute inset-0 gradient-cool opacity-20 hero-pulse"></div>
+      <div className="hero-clean-bg pointer-events-none">
+        <div className="hero-clean-orb hero-clean-orb-left"></div>
+        <div className="hero-clean-orb hero-clean-orb-right"></div>
+        <div className="hero-clean-vignette"></div>
       </div>
 
       {/* Content */}
@@ -44,10 +15,10 @@ const Hero = () => {
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-cool-blue-400 via-cool-purple-400 to-cool-teal-400 bg-clip-text text-transparent animate-fade-in">
           Pale Thread Games
         </h1>
-        <p className="text-xl md:text-2xl lg:text-3xl text-slate-300 mb-4 font-light">
+        <p className="text-lg md:text-xl lg:text-2xl text-slate-300 mb-4 font-light">
           Crafting immersive roguelike and metroidvania experiences
         </p>
-        <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8">
+        <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-8">
           Where every run is unique, every path is yours to discover
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

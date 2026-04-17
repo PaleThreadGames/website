@@ -39,14 +39,19 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-20 md:py-32 bg-slate-800/50 relative"
+      className="contact-clean-section py-20 md:py-32 relative"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="contact-clean-bg" aria-hidden="true">
+        <div className="contact-clean-beam"></div>
+        <div className="contact-clean-mist"></div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-cool-teal-400 to-cool-blue-400 bg-clip-text text-transparent">
             Get In Touch
           </h2>
-          <p className="text-xl text-slate-400 text-center mb-12">
+          <p className="text-lg text-slate-400 text-center mb-12">
             Have a question or want to collaborate? We'd love to hear from you!
           </p>
 
