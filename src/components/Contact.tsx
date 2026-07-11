@@ -1,5 +1,11 @@
 import { useState, FormEvent } from 'react';
 import { ContactFormData } from '../types';
+import { Section } from '@/components/ui/section';
+import { SectionHeading } from '@/components/ui/section-heading';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 const Contact = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -24,12 +30,11 @@ const Contact = () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    // Simulate form submission (replace with actual API call)
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -37,119 +42,99 @@ const Contact = () => {
   };
 
   return (
-    <section
-      id="contact"
-      className="contact-clean-section py-20 md:py-32 relative"
-    >
-      <div className="contact-clean-bg" aria-hidden="true">
-        <div className="contact-clean-beam"></div>
-        <div className="contact-clean-mist"></div>
-      </div>
+    <Section id="contact" background="contact">
+      <div className="max-w-2xl mx-auto">
+        <SectionHeading
+          title="Get In Touch"
+          subtitle="Have a question or want to collaborate? We'd love to hear from you!"
+        />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-cool-teal-400 to-cool-blue-400 bg-clip-text text-transparent">
-            Get In Touch
-          </h2>
-          <p className="text-lg text-slate-400 text-center mb-12">
-            Have a question or want to collaborate? We'd love to hear from you!
-          </p>
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-slate-300 mb-2"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-slate-900 border border-cool-blue-500/30 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cool-teal-400 focus:ring-2 focus:ring-cool-teal-400/20 transition-all"
-                placeholder="Your name"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-slate-300 mb-2"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-slate-900 border border-cool-blue-500/30 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cool-teal-400 focus:ring-2 focus:ring-cool-teal-400/20 transition-all"
-                placeholder="your.email@example.com"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium text-slate-300 mb-2"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={6}
-                className="w-full px-4 py-3 bg-slate-900 border border-cool-blue-500/30 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cool-teal-400 focus:ring-2 focus:ring-cool-teal-400/20 transition-all resize-none"
-                placeholder="Your message..."
-              />
-            </div>
-
-            {submitStatus === 'success' && (
-              <div className="p-4 bg-cool-teal-500/20 border border-cool-teal-500/30 rounded-lg text-cool-teal-300">
-                Thank you for your message! We'll get back to you soon.
+        <Card className="p-8 md:p-10 border-border bg-card">
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-sm font-medium text-muted-foreground">
+                  Name
+                </label>
+                <Input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Your name"
+                />
               </div>
-            )}
 
-            {submitStatus === 'error' && (
-              <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300">
-                Something went wrong. Please try again later.
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-sm font-medium text-muted-foreground">
+                  Email
+                </label>
+                <Input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="your.email@example.com"
+                />
               </div>
-            )}
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full px-8 py-4 bg-gradient-to-r from-cool-blue-600 to-cool-teal-600 hover:from-cool-blue-500 hover:to-cool-teal-500 rounded-lg font-semibold text-white transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              <div className="space-y-2">
+                <label htmlFor="message" className="text-sm font-medium text-muted-foreground">
+                  Message
+                </label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={6}
+                  placeholder="Your message..."
+                />
+              </div>
+
+              {submitStatus === 'success' && (
+                <div className="p-4 bg-primary/10 border border-primary/30 rounded-lg text-primary">
+                  Thank you for your message! We'll get back to you soon.
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="p-4 bg-destructive/10 border border-destructive/30 rounded-lg text-destructive">
+                  Something went wrong. Please try again later.
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full"
+                size="lg"
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+
+        <div className="mt-16 pt-8 border-t border-border">
+          <p className="text-center text-muted-foreground mb-4">Or reach us directly:</p>
+          <div className="flex justify-center">
+            <a
+              href="mailto:kyle@palethread.games"
+              className="text-primary hover:text-primary/80 transition-colors duration-200 font-medium"
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-          </form>
-
-          <div className="mt-12 pt-8 border-t border-slate-700">
-            <p className="text-center text-slate-400 mb-4">Or reach us directly:</p>
-            <div className="flex justify-center">
-              <a
-                href="mailto:kyle@palethread.games"
-                className="text-cool-teal-400 hover:text-cool-teal-300 transition-colors font-medium"
-              >
-                kyle@palethread.games
-              </a>
-            </div>
+              kyle@palethread.games
+            </a>
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 
 export default Contact;
-

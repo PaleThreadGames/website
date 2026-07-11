@@ -8,59 +8,48 @@ const Footer = () => {
     }
   };
 
+  const navLinks = [
+    { id: 'about', label: 'About' },
+    { id: 'games', label: 'Games' },
+    { id: 'contact', label: 'Contact' },
+  ];
+
   return (
-    <footer className="bg-slate-900 border-t border-slate-800 py-12">
+    <footer className="bg-background border-t border-border py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Company Info */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
-            <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-cool-blue-400 to-cool-teal-400 bg-clip-text text-transparent">
-              Pale Thread Games
+            <h3 className="text-lg font-semibold mb-4 text-foreground">
+              Pale <span className="text-primary">Thread</span> Games
             </h3>
-            <p className="text-slate-400 text-sm">
+            <p className="text-muted-foreground text-sm leading-relaxed">
               Crafting immersive roguelike and metroidvania gaming experiences.
             </p>
           </div>
 
-          {/* Navigation */}
           <div>
-            <h4 className="text-lg font-semibold text-slate-300 mb-4">Navigation</h4>
-            <ul className="space-y-2">
-              <li>
-                <button
-                  onClick={() => scrollToSection('about')}
-                  className="text-slate-400 hover:text-cool-teal-400 transition-colors text-sm"
-                >
-                  About
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('games')}
-                  className="text-slate-400 hover:text-cool-teal-400 transition-colors text-sm"
-                >
-                  Games
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('contact')}
-                  className="text-slate-400 hover:text-cool-teal-400 transition-colors text-sm"
-                >
-                  Contact
-                </button>
-              </li>
+            <h4 className="text-sm font-semibold text-foreground mb-4">Navigation</h4>
+            <ul className="space-y-3">
+              {navLinks.map((link) => (
+                <li key={link.id}>
+                  <button
+                    onClick={() => scrollToSection(link.id)}
+                    className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm"
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold text-slate-300 mb-4">Contact</h4>
-            <ul className="space-y-2">
+            <h4 className="text-sm font-semibold text-foreground mb-4">Contact</h4>
+            <ul className="space-y-3">
               <li>
                 <a
                   href="mailto:kyle@palethread.games"
-                  className="text-slate-400 hover:text-cool-teal-400 transition-colors text-sm"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200 text-sm"
                 >
                   kyle@palethread.games
                 </a>
@@ -69,9 +58,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-slate-800 pt-8 text-center">
-          <p className="text-slate-500 text-sm">
+        <div className="border-t border-border pt-8 text-center">
+          <p className="text-muted-foreground text-sm">
             © {currentYear} Pale Thread Games. All rights reserved.
           </p>
         </div>
@@ -81,4 +69,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
